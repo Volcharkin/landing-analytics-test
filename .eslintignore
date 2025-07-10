@@ -1,0 +1,10 @@
+# by default eslint ignoring dot-files
+!.*
+
+**/node_modules/
+
+# output
+/dist
+/build
+/bin
+/lib

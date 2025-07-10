@@ -1,0 +1,24 @@
+stages:
+  - build
+  - test
+
+variables:
+  DOCKER_IMAGE: playwright-test
+
+build:
+  stage: build
+  image: docker:latest
+  tags: [docker]
+  services:
+    - docker:dind # Docker-in-Docker для сборки образов
+  script:
+    - docker build -t $DOCKER_IMAGE .
+
+test:
+  stage: test
+  image: docker:latest
+  tags: [docker]
+  services:
+    - docker:dind
+  script:
+    - docker run --rm $DOCKER_IMAGE

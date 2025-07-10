@@ -1,0 +1,12 @@
+{
+    "all": true,
+    "include": [
+        "src"
+    ],
+    "reporter": [
+        "text",
+        "text-summary",
+        "lcov"
+    ],
+    "check-coverage": false
+}
