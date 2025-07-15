@@ -275,7 +275,7 @@ await checkStep('Проверка AJAX-запроса к send_clickhouse.php', a
         // 4. Проверка перехода на страницу успешной регистрации
         await checkStep('Проверка перехода на страницу успешной регистрации', async () => {
             console.log('Ожидание перехода на страницу успешной регистрации...');
-            await page.waitForURL('https://auth.brokensun.com/result/%20brokensun.com', { timeout: 60000 });
+            await page.waitForURL('https://auth.xxxxx.com/result/%20xxxxx.com', { timeout: 60000 });
 
             // Клик по кнопкe "OK"
             console.log('Клик по кнопкe "OK"...');
@@ -429,81 +429,81 @@ const checkYandexMetricaGoal = async () => {
 // Вызываем функцию для теста
 checkYandexMetricaGoal();
 
-// //API запрос к GA
-// // Получаем propertyId из .env
-// const propertyId = process.env.GA4_PROPERTY_ID;
+//API запрос к GA
+// Получаем propertyId из .env
+const propertyId = process.env.GA4_PROPERTY_ID;
 
-// // Определяем переменную для clientId (Google Tag ID), можно заменить на динамическое значение
-// const clientId = 'GA1.1.671322060.1734445402'; // Жестко заданное значение для тестов
+// Определяем переменную для clientId (Google Tag ID), можно заменить на динамическое значение
+ const clientId = 'GA1.1.671322060.1734445402'; // Жестко заданное значение для тестов
 
-// async function runReportWithDimensionAndMetricFilters() {
-//     // Инициализируем клиент для отправки запросов к Google Analytics Data API
-//     const analyticsDataClient = new BetaAnalyticsDataClient();
+ async function runReportWithDimensionAndMetricFilters() {
+     // Инициализируем клиент для отправки запросов к Google Analytics Data API
+     const analyticsDataClient = new BetaAnalyticsDataClient();
 
-//     // Выполняем отчет с фильтрацией по eventName (offline_registration_success)
-//     // и activeUsers (Google Tag ID)
-//     const [response] = await analyticsDataClient.runReport({
-//         property: `properties/${propertyId}`,
-//         dimensions: [
-//             {
-//                 name: 'eventName',
-//             },
-//         ],
-//         metrics: [
-//             {
-//                 name: 'clientId',
-//             },
-//         ],
-//         dateRanges: [
-//             {
-//                 startDate: 'yesterday',
-//                 endDate: 'today',
-//             },
-//         ],
-//         metricFilter: {
-//             filter: {
-//                 fieldName: 'clientId',
-//                 stringFilter: {
-//                     matchType: 'EXACT',
-//                     value: clientId,
-//                 },
-//             },
-//         },
-//         dimensionFilter: {
-//             filter: {
-//                 fieldName: 'eventName',
-//                 stringFilter: {
-//                     matchType: 'EXACT',
-//                     value: 'offline_registration_success',
-//                 },
-//             },
-//         },
-//     });
+     // Выполняем отчет с фильтрацией по eventName (offline_registration_success)
+     // и activeUsers (Google Tag ID)
+     const [response] = await analyticsDataClient.runReport({
+         property: `properties/${propertyId}`,
+         dimensions: [
+             {
+                 name: 'eventName',
+             },
+         ],
+         metrics: [
+             {
+                 name: 'clientId',
+             },
+         ],
+         dateRanges: [
+             {
+                 startDate: 'yesterday',
+                 endDate: 'today',
+             },
+         ],
+         metricFilter: {
+             filter: {
+                 fieldName: 'clientId',
+                 stringFilter: {
+                     matchType: 'EXACT',
+                     value: clientId,
+                 },
+             },
+         },
+         dimensionFilter: {
+             filter: {
+                 fieldName: 'eventName',
+                 stringFilter: {
+                     matchType: 'EXACT',
+                     value: 'offline_registration_success',
+                 },
+             },
+         },
+     });
     
-//     printRunReportResponse(response);
-// }
+     printRunReportResponse(response);
+ }
 
-// // Функция для вывода результатов отчета
-// function printRunReportResponse(response) {
-//     console.log(`${response.rowCount} строк получено`);
-//     response.dimensionHeaders.forEach(dimensionHeader => {
-//         console.log(`Заголовок измерения: ${dimensionHeader.name}`);
-//     });
-//     response.metricHeaders.forEach(metricHeader => {
-//         console.log(`Заголовок метрики: ${metricHeader.name} (${metricHeader.type})`);
-//     });
+ // Функция для вывода результатов отчета
+ function printRunReportResponse(response) {
+     console.log(`${response.rowCount} строк получено`);
+     response.dimensionHeaders.forEach(dimensionHeader => {
+         console.log(`Заголовок измерения: ${dimensionHeader.name}`);
+     });
+     response.metricHeaders.forEach(metricHeader => {
+         console.log(`Заголовок метрики: ${metricHeader.name} (${metricHeader.type})`);
+     });
 
-//     console.log('Результаты отчета:');
-//     response.rows.forEach(row => {
-//         console.log(`${row.dimensionValues[0].value}, ${row.metricValues[0].value}`);
-//     });
-// }
+     console.log('Результаты отчета:');
+     response.rows.forEach(row => {
+         console.log(`${row.dimensionValues[0].value}, ${row.metricValues[0].value}`);
+     });
+ }
 
-// // Запускаем отчет
-// runReportWithDimensionAndMetricFilters().catch(err => {
-//     console.error(`Ошибка: ${err.message}`);
-//     process.exitCode = 1;
-// });
+ // Запускаем отчет
+ runReportWithDimensionAndMetricFilters().catch(err => {
+     console.error(`Ошибка: ${err.message}`);
+     process.exitCode = 1;
+ });
 
     
     } finally {
